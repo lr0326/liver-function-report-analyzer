@@ -23,6 +23,15 @@ requests==2.32.3
 SQLAlchemy==2.0.30
 Flask-SQLAlchemy==3.1.1
 
+# PostgreSQL driver (optional – only needed when DATABASE_URL starts with postgresql://)
+psycopg2-binary==2.9.9
+
+# Date/time utilities
+python-dateutil==2.9.0
+
+# Database migrations
+alembic==1.13.1
+
 # Image processing (PaddleOCR dependency)
 # Pinned to 12.2.0+ to fix CVE FITS GZIP decompression bomb and out-of-bounds write on PSD images
 Pillow==12.2.0
