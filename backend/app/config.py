@@ -34,6 +34,7 @@ class Config:
 
     # Database settings
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///liver_analyzer.db")
+    DATABASE_ECHO: bool = os.getenv("DATABASE_ECHO", "False").lower() == "true"
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
 
     # OCR settings
