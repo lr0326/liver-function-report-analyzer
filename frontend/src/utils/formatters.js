@@ -73,7 +73,7 @@ export function getIndicatorStatus(value, normalRange) {
   const upperBound = typeof max === 'number' ? max : Infinity
 
   if (num < lowerBound) {
-    const ratio = (lowerBound - num) / lowerBound
+    const ratio = lowerBound > 0 ? (lowerBound - num) / lowerBound : 1
     if (ratio > 0.3) return 'severe'
     if (ratio > 0.1) return 'moderate'
     return 'mild'

@@ -8,17 +8,24 @@ import ReportList from '../components/ReportList'
 import { useApp } from '../context/AppContext'
 import { formatDate } from '../utils/formatters'
 
+const now = new Date()
+const monthsAgo = (n) => {
+  const d = new Date(now)
+  d.setMonth(d.getMonth() - n)
+  return d.toISOString().slice(0, 10)
+}
+
 const MOCK_REPORTS = [
-  { id: 'r001', fileName: '肝功能_2024-03.pdf', createdAt: '2024-03-15', status: 'completed', riskScore: 18 },
-  { id: 'r002', fileName: '肝功能_2024-06.pdf', createdAt: '2024-06-20', status: 'completed', riskScore: 42 },
-  { id: 'demo', fileName: '肝功能_2024-09.pdf', createdAt: '2024-09-10', status: 'completed', riskScore: 55 },
+  { id: 'r001', fileName: `肝功能_${monthsAgo(8).slice(0, 7)}.pdf`, createdAt: monthsAgo(8), status: 'completed', riskScore: 18 },
+  { id: 'r002', fileName: `肝功能_${monthsAgo(5).slice(0, 7)}.pdf`, createdAt: monthsAgo(5), status: 'completed', riskScore: 42 },
+  { id: 'demo', fileName: `肝功能_${monthsAgo(2).slice(0, 7)}.pdf`, createdAt: monthsAgo(2), status: 'completed', riskScore: 55 },
 ]
 
 const MOCK_TREND = [
-  { date: '2024-01', label: '2024/01', ALT: 35, AST: 36, GGT: 42 },
-  { date: '2024-03', label: '2024/03', ALT: 38, AST: 38, GGT: 50 },
-  { date: '2024-06', label: '2024/06', ALT: 67, AST: 48, GGT: 75 },
-  { date: '2024-09', label: '2024/09', ALT: 55, AST: 44, GGT: 65 },
+  { date: monthsAgo(8), label: monthsAgo(8).slice(0, 7).replace('-', '/'), ALT: 35, AST: 36, GGT: 42 },
+  { date: monthsAgo(6), label: monthsAgo(6).slice(0, 7).replace('-', '/'), ALT: 38, AST: 38, GGT: 50 },
+  { date: monthsAgo(5), label: monthsAgo(5).slice(0, 7).replace('-', '/'), ALT: 67, AST: 48, GGT: 75 },
+  { date: monthsAgo(2), label: monthsAgo(2).slice(0, 7).replace('-', '/'), ALT: 55, AST: 44, GGT: 65 },
 ]
 
 function StatCard({ icon, label, value, sub, color = 'blue' }) {

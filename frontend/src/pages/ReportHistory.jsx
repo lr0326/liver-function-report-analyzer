@@ -4,13 +4,20 @@ import Card from '../components/common/Card'
 import ReportList from '../components/ReportList'
 import { useApp } from '../context/AppContext'
 
+const now = new Date()
+const monthsAgo = (n) => {
+  const d = new Date(now)
+  d.setMonth(d.getMonth() - n)
+  return d.toISOString().slice(0, 10)
+}
+
 const MOCK_REPORTS = [
-  { id: 'r001', fileName: '肝功能_2024-01.pdf', createdAt: '2024-01-10', status: 'completed', riskScore: 15 },
-  { id: 'r002', fileName: '肝功能_2024-03.pdf', createdAt: '2024-03-15', status: 'completed', riskScore: 18 },
-  { id: 'r003', fileName: '体检报告_2024-05.jpg', createdAt: '2024-05-22', status: 'completed', riskScore: 32 },
-  { id: 'r004', fileName: '肝功能_2024-06.pdf', createdAt: '2024-06-20', status: 'completed', riskScore: 42 },
-  { id: 'demo', fileName: '肝功能_2024-09.pdf', createdAt: '2024-09-10', status: 'completed', riskScore: 55 },
-  { id: 'r006', fileName: '年度体检_2023-12.pdf', createdAt: '2023-12-05', status: 'completed', riskScore: 20 },
+  { id: 'r001', fileName: `肝功能_${monthsAgo(14).slice(0, 7)}.pdf`, createdAt: monthsAgo(14), status: 'completed', riskScore: 15 },
+  { id: 'r002', fileName: `肝功能_${monthsAgo(11).slice(0, 7)}.pdf`, createdAt: monthsAgo(11), status: 'completed', riskScore: 18 },
+  { id: 'r003', fileName: `体检报告_${monthsAgo(9).slice(0, 7)}.jpg`,  createdAt: monthsAgo(9),  status: 'completed', riskScore: 32 },
+  { id: 'r004', fileName: `肝功能_${monthsAgo(5).slice(0, 7)}.pdf`,  createdAt: monthsAgo(5),  status: 'completed', riskScore: 42 },
+  { id: 'demo', fileName: `肝功能_${monthsAgo(2).slice(0, 7)}.pdf`,  createdAt: monthsAgo(2),  status: 'completed', riskScore: 55 },
+  { id: 'r006', fileName: `年度体检_${monthsAgo(17).slice(0, 7)}.pdf`, createdAt: monthsAgo(17), status: 'completed', riskScore: 20 },
 ]
 
 const STATUS_OPTIONS = [

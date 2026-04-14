@@ -11,6 +11,8 @@ import RiskScoreDisplay from '../components/RiskScoreDisplay'
 import HealthSuggestions from '../components/HealthSuggestions'
 import AnalysisSummary from '../components/AnalysisSummary'
 import { getAnalysisResult } from '../services/api'
+import { getIndicatorStatus } from '../utils/formatters'
+import { INDICATOR_INFO } from '../constants/indicators'
 
 const MOCK_DATA = {
   id: 'demo',
@@ -161,8 +163,9 @@ export default function Results() {
     keyFindings: data?.keyFindings || [],
     totalCount: data?.indicators?.length ?? 0,
     abnormalCount: data?.indicators?.filter((ind) => {
-      const val = parseFloat(ind.value)
-      return isNaN(val) ? false : val !== ind.value
+      const info = INDICATOR_INFO[ind.key] || {}
+      const status = getIndicatorStatus(ind.value, info.normalRange)
+      return status !== 'normal' && status !== 'unknown'
     }).length ?? 0,
   }
 
